@@ -30,7 +30,7 @@ class HomePage():
 username = 'you_username'
 password = 'your_password'
 
-browser = webdriver.Firefox(executable_path="C:/Users/gaura/Desktop/geckodriver")
+browser = webdriver.Firefox(executable_path="geckopath")
 home = HomePage(browser)
 home = home.goTo_login_page()
 home.login(username, password)
