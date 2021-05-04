@@ -27,8 +27,8 @@ class HomePage():
         return LoginPage(self.driver)
 
 
-username = 'rudransh69420'
-password = 'rudra1609'
+username = 'you_username'
+password = 'your_password'
 
 browser = webdriver.Firefox(executable_path="C:/Users/gaura/Desktop/geckodriver")
 home = HomePage(browser)
