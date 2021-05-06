@@ -17,7 +17,6 @@ class Interactions():
         d = self.driver.find_element_by_xpath("//a[@class='-qQT3']")
         sleep(8)
         d.click()
-        
     def like_many(self, number):
         first_image = self.driver.find_element_by_class_name("v1Nh3")
         first_image.click()
@@ -31,7 +30,6 @@ class Interactions():
                 next_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[1]/div/div/a[2]")
             next_button.click()
         sleep(20)
-        
     def comment(self, content):
         comment_button = self.driver.find_element_by_xpath("//*[@aria-label='Comment']")
         comment_button.click()
@@ -59,7 +57,6 @@ class Interactions():
                 next_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[1]/div/div/a[2]")
             next_button.click()
         sleep(20)
-        
     def like_and_comment_many(sefl, number, content):
         first_image = self.driver.find_element_by_class_name("v1Nh3")
         first_image.click()
@@ -114,7 +111,6 @@ class HomePage():
         self.driver.get("https://www.instagram.com/")
         self.driver.implicitly_wait(5)
         return LoginPage(self.driver)
-
 
 username = 'your_username'
 password = 'your_password'
