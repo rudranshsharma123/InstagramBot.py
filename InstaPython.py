@@ -17,6 +17,7 @@ class Interactions():
         d = self.driver.find_element_by_xpath("//a[@class='-qQT3']")
         sleep(8)
         d.click()
+        
     def like_many(self, number):
         first_image = self.driver.find_element_by_class_name("v1Nh3")
         first_image.click()
@@ -30,6 +31,7 @@ class Interactions():
                 next_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[1]/div/div/a[2]")
             next_button.click()
         sleep(20)
+    
     def comment(self, content):
         comment_button = self.driver.find_element_by_xpath("//*[@aria-label='Comment']")
         comment_button.click()
@@ -57,7 +59,8 @@ class Interactions():
                 next_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[1]/div/div/a[2]")
             next_button.click()
         sleep(20)
-    def like_and_comment_many(sefl, number, content):
+        
+    def like_and_comment_many(self, number, content):
         first_image = self.driver.find_element_by_class_name("v1Nh3")
         first_image.click()
         for i in range(number):
@@ -112,32 +115,20 @@ class HomePage():
         self.driver.implicitly_wait(5)
         return LoginPage(self.driver)
 
-username = 'your_username'
-password = 'your_password'
-search_text = "#cats"
-comment_text = 'Amazing!'
-number_of_posts_to_be_liked = 3
+username = 'your_username' #add Your username   
+password = 'your_password' #add your Password
+search_text = "#cats" # Type in the thing you would want to be searched
+comment_text = 'Amazing!' # Type in the comment you would want to be added
+number_of_posts_to_be_liked = 3 #type in the number of posts you would want to go through
 
-browser = webdriver.Firefox(executable_path="geckodriver.exe_filePath")
+browser = webdriver.Firefox(executable_path="geckodriver.exe_filePath") #Add the path to the gekodriver you can also add realative path instead of the actual 
 home = HomePage(browser)
 home = home.goTo_login_page()
 dogs = home.login(username, password)
 dogs.search(search_text)
 # dogs.save_post()
-dogs.like_and_comment_many_save(number_of_posts_to_be_liked, comment_text)
+dogs.like_and_comment_many_save(number_of_posts_to_be_liked, comment_text) # you can use other functions of the class Interactions instead of this one also. 
 
 
 
-
-
-
-# browser.get('https://www.instagram.com/')
-# browser.implicitly_wait(5)
-
-# wait = WebDriverWait(browser, 10)
-# print('Title: %s' % browser.title)
-# username = browser.find_element_by_xpath("//input[@name='username']").send_keys(username)
-# first_result = wait.until(presence_of_element_located((By.XPATH, "//input[@name='username']")))
-
-# sleep(10)
 browser.quit()
