@@ -31,6 +31,59 @@ class Interactions():
                 next_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[1]/div/div/a[2]")
             next_button.click()
         sleep(20)
+        
+    def comment(self, content):
+        comment_button = self.driver.find_element_by_xpath("//*[@aria-label='Comment']")
+        comment_button.click()
+        comment_area = self.driver.find_element_by_xpath("/html/body/div[5]/div[2]/div/article/div[3]/section[3]/div/form/textarea")
+        comment_area.send_keys(content)
+        sleep(10)
+        # sleep(10)
+        post_button = self.driver.find_element_by_xpath("//button[@type='submit']")
+        post_button.click()
+        sleep(10)
+        
+    def like_and_comment_many_save(self, number, content):
+        first_image = self.driver.find_element_by_class_name("v1Nh3")
+        first_image.click()
+        for i in range(number):
+            sleep(6+i)
+            like_button = self.driver.find_element_by_xpath("//*[@aria-label='Like']")
+            like_button.click()
+            self.comment(content)
+            sleep(10)
+            self.save_post()
+            if i == 0:
+                next_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[1]/div/div/a")
+            else:
+                next_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[1]/div/div/a[2]")
+            next_button.click()
+        sleep(20)
+        
+    def like_and_comment_many(sefl, number, content):
+        first_image = self.driver.find_element_by_class_name("v1Nh3")
+        first_image.click()
+        for i in range(number):
+            sleep(6+i)
+            like_button = self.driver.find_element_by_xpath("//*[@aria-label='Like']")
+            like_button.click()
+            self.comment(content)
+            sleep(10)
+            if i == 0:
+                next_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[1]/div/div/a")
+            else:
+                next_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[1]/div/div/a[2]")
+            next_button.click()
+        sleep(20)
+
+
+
+    def save_post(self):
+        sleep(10)
+        save_button = self.driver.find_element_by_xpath("/html/body/div[5]/div[2]/div/article/div[3]/section[1]/span[4]/div/div/button")
+        save_button.click()
+        sleep(10)
+
 
 class LoginPage():
     def __init__(self, driver):
@@ -44,7 +97,11 @@ class LoginPage():
         submit_button = self.driver.find_element_by_xpath("//button[@type='submit']")
         submit_button.click()
         sleep(10)
+        
         return Interactions(self.driver)
+        
+        
+        # return Interactions(self.driver)
         # driver.execute_script("arguments[0].click()", like_button)
         # sleep(10)
         # self.driver.get('https://www.instagram.com/explore/tags/dogs/')
@@ -61,16 +118,17 @@ class HomePage():
 
 username = 'your_username'
 password = 'your_password'
+search_text = "#cats"
+comment_text = 'Amazing!'
+number_of_posts_to_be_liked = 3
 
-
-number_to_be_liked = 4 #add the number of images you want to like
-keyword_to_be_searched = "#cats" #change it to the hashTag/explore page you would want to auto like. 
-browser = webdriver.Firefox(executable_path="C:/Users/gaura/Desktop/geckodriver")
+browser = webdriver.Firefox(executable_path="geckodriver.exe_filePath")
 home = HomePage(browser)
 home = home.goTo_login_page()
-dogs = home.login(username, password) 
-dogs.search("#cats")
-dogs.like_many(number_to_be_liked)
+dogs = home.login(username, password)
+dogs.search(search_text)
+# dogs.save_post()
+dogs.like_and_comment_many_save(number_of_posts_to_be_liked, comment_text)
 
 
 
